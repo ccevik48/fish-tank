@@ -23,13 +23,17 @@ addEventListener('resize', () => {
 // addEventListener('resize', () => {
 //   clk.x = canvas.width/2
 //   clk.y = canvas.height/2
-// })
+// })  
 
 
 
 var imgLoc = ['fish/green.png','fish/orange.png','fish/carp.png','fish/angel.png','fish/bass.png','fish/catf.png',
               'fish/coel.png','fish/dace.png','fish/eel.png','fish/killif.png','fish/knife.png','fish/salmon.png',
-              'fish/smelt.png','fish/snapper.png','fish/steel.png','fish/string.png','fish/sweet.png','fish/trout.png']
+              'fish/smelt.png','fish/snapper.png','fish/steel.png','fish/string.png','fish/sweet.png','fish/trout.png',
+              'fish/arapaima.png','fish/bluegill.png','fish/char.png','fish/cherry.png','fish/goby.png','fish/goldfish.png',
+              'fish/guppy.png','fish/herabuna.png','fish/koi.png','fish/loach.png','fish/palechub.png','fish/piranha.png',
+              'fish/snakehead.png'
+            ]
 var fishPics = new Array();
 for(var j = 0; j < imgLoc.length;j++) {
   fishPics[j] = new Image();
@@ -42,10 +46,10 @@ console.log(fishPics)
 
 class Fish {
   constructor(imgsrc) {
-    this.x = (canvas.width - 30) * Math.random() + 15
-    this.y = (canvas.height - 30) * Math.random() + 15
-    this.newX = (canvas.width - 30) * Math.random() + 15
-    this.newY = (canvas.height - 30) * Math.random() + 15
+    this.x = (canvas.width*1.5) * Math.random() - canvas.width/2.5
+    this.y = (canvas.height*1.5) * Math.random() - canvas.height/2.5
+    this.newX = (canvas.width*1.5) * Math.random() - canvas.width/2.5
+    this.newY = (canvas.height*1.5) * Math.random() - canvas.height/2.5
     this.imgsrc = imgsrc
     this.flipped
   }
@@ -60,15 +64,15 @@ class Fish {
   async swim() {
     while (Math.abs(this.x - this.newX) > 10 && Math.abs(this.y - this.newY) > 10) {
       await sleep(40 * Math.random() + 40)
-      if (this.x < this.newX) { this.x += .016; this.flipped = true } else { this.x -= .016; this.flipped = false }
+      if (this.x < this.newX) { this.x += .030; this.flipped = true } else { this.x -= .030; this.flipped = false }
       await sleep(150 * Math.random() + 50)
-      if (this.y < this.newY) { this.y += .002 } else { this.y -= .002 }
+      if (this.y < this.newY) { this.y += .021 } else { this.y -= .021 }
     }
   }
 
   goToPoint() {
-    this.newX = (canvas.width) * Math.random() 
-    this.newY = (canvas.height) * Math.random() 
+    this.newX = (canvas.width*3) * Math.random() - canvas.width
+    this.newY = (canvas.height*3) * Math.random() - canvas.height
   }
 
   update() {
@@ -101,10 +105,10 @@ function animate() {
   requestAnimationFrame(animate)
   c.clearRect(0, 0, canvas.width, canvas.height)
 
-  var my_gradient = c.createLinearGradient(0, 0, 0, canvas.height);
-  my_gradient.addColorStop(0, "#CCE0FF");
-  my_gradient.addColorStop(1, "#0066FF");
-  c.fillStyle = my_gradient;
+  // var my_gradient = c.createLinearGradient(0, 0, 0, canvas.height);
+  // my_gradient.addColorStop(0, "#CCE0FF");
+  // my_gradient.addColorStop(1, "#0066FF");
+  c.fillStyle = "#0066FF";
   c.fillRect(0, 0, canvas.width, canvas.width);
 
   fishArr2.forEach(f => {
